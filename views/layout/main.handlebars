@@ -5,34 +5,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Track Your Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <header>
-        <h1>
-            Track Your Travels
-        </h1>
-        {{#if logged_in}}
-        <nav>
-            <button class="btn" id="logout">Log Out</button>
-        </nav>
-        {{else}}
-        <nav>
-            <a href="/login" class="btn">Log In</a>
-            <a href="/signup" class="btn">Sign Up</a>
-        </nav>
-        {{/if}}
+    <header class="navbar is-dark">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">Travel Blog</a>
+    </div>
+        <div class="navbar-menu">
+        <div class="navbar-end">
+            {{#if logged_in}}
+            <div class="navbar-item">
+                <a href="/logout" class="button is-light">Logout</a>
+            </div>
+            {{else}}
+            <div class="navbar-item">
+                <a href="/login" class="button is-light">Login</a>
+            </div>
+            <div class="navbar-item">
+                <a href="/register" class="button is-light">Register</a>
+            </div>
+            {{/if}}
+        </div>
+        </div>
     </header>
-    <main>
+    <main class="container mt-5">
         {{{ body }}}
     </main>
-    <footer>
+    <footer class="footer has-background-dark has-text-white-ter">
+        <div class="content has-text-centered">
         <p>&copy; 2024 Track Your Travels</p>
+        </div>
     </footer>
-    {{#if logged_in}}
-    <script src="/public/js/logout.js"></script>
-    {{/if}}
 </body>
 
 </html>
