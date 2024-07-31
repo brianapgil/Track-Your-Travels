@@ -1,0 +1,53 @@
+{{#extends "main"}}
+{{#block "body"}}
+<section class="section">
+    <div class="container">
+        <h2 class="title">Your Collection</h2>
+        {{#each entry}}
+            <div class="card mb-5">
+                <div class="card content">
+                    <p class="title">{{title}}</p>
+                    <p class="description"></p>
+                    <div id="map-{{@index}}" class="map-container" style="height: 400px"></div>
+                    <button class="button is-danger mt-3" id="delete-{{id}}" onclick="deleteEntry({{id}})">Delete</button>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</section>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+
+<script>
+    mapboxgl.accessToken = '{{process.env.MAPBOX_ACCESS_TOKEN}}';
+
+    {{#each entry}}
+        const coordinates = [{{location}}];
+        const map{{@index}} = new mapboxgl.Map({
+            container: 'map-{{@index}}',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: coordinates,
+            zoom: 12
+        });
+
+        new mapboxgl.Marker()
+            .setLngLat(coordinates)
+            .addTo(map{{@index}});
+    {{/each}}
+
+    async function deleteEntry(id){
+        const response = await fetch('/api/entry/${id}'), {
+            method: 'DELETE',
+            headers: { 'Content Type': 'application/json'}
+        }
+    };
+
+    if (response.ok){
+        document.location.reload();
+    } else {
+        alert('Failed to delete entry');
+    }
+
+</script>
+{{/block}}

@@ -1,0 +1,54 @@
+{{#extends "main"}}
+{{#block "body"}}
+<section class="section">
+  <div class="container">
+    <h2 class="title">Add New Travel Entry</h2>
+    <form action="/entry" method="POST">
+      <div class="field">
+        <label class="label" for="title">Title:</label>
+        <div class="control">
+          <input class="input" type="text" id="title" name="title" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="description">Description:</label>
+        <div class="control">
+          <textarea class="textarea" id="description" name="description" required></textarea>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="location">Location (Latitude, Longitude):</label>
+        <div class="control">
+          <input class="input" type="text" id="location" name="location" placeholder="e.g., 40.712776, -74.005974" required>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="map">Map:</label>
+        <div id="map" class="map-container" style="height: 400px;"></div>
+      </div>
+      <div class="control">
+        <button class="button is-primary" type="submit">Add Entry</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Mapbox JS -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+
+<script>
+  mapboxgl.accessToken = '{{process.env.MAPBOX_TOKEN}}';
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-74.005974, 40.712776], // Default location of New York City
+    zoom: 12
+  });
+
+  map.on('click', (e) => {
+    const coordinates = e.lngLat;
+    document.getElementById('location').value = `${coordinates.lat}, ${coordinates.lng}`;
+  });
+</script>
+{{/block}}
