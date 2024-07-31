@@ -15,6 +15,13 @@ Entry.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        location:{
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                is: /^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/ // Regex to validate as latitude or longitude
+        },
+        },
         description: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -22,7 +29,7 @@ Entry.init(
         user_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
+                model: 'user_db',
                 key: 'id',
             },
         },
@@ -33,7 +40,7 @@ Entry.init(
         freezeTableName: true,
         underscored: true,
         modelName: 'entry',
-      }
+      },
 );
 
 module.exports = Entry;
