@@ -23,6 +23,7 @@
     },
     "devDependencies": {
         "eslint": "^7.12.1",
-        "eslint-config-prettier": "^6.15.0"
+        "eslint-config-prettier": "^6.15.0",
+        "sequelize-cli": "^6.6.2"
     }
 }
