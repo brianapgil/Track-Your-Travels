@@ -1,20 +1,36 @@
-<div class="comment card">
-  <div class="card-header">
-    <h2>Edit Comment</h2>
-  </div>
-  <form id="edit-comment-form" class="card-body">
-    <input type="hidden" name="comment-id" value="{{comment.id}}" />
+const entryId = document.querySelector('input[name="entry-id"]').value;
 
-    <label class="form-label" for="comment-author">Author</label>
-    <input type="text" name="comment-author" value="{{comment.author}}" class="form-input" />
+const editFormHandler = async function (event) {
+  event.preventDefault();
 
-    <label class="form-label" for="comment-content">Content</label>
-    <textarea name="comment-content" class="form-input">{{comment.content}}</textarea>
+  const title = document.querySelector('input[name="entry-title"]').value;
+  const body = document.querySelector('textarea[name="entry-body"]').value;
 
-    <button type="submit" class="btn">Update</button>
+  await fetch(`/api/entries/${entryId}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      title,
+      body,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-    <button type="button" id="delete-comment-btn" class="btn">Delete</button>
-  </form>
-</div>
+  document.location.replace("/dashboard");
+};
 
-<script src="../public/js/editComment.js"></script>
+const deleteClickHandler = async function () {
+  await fetch(`/api/entries/${entryId}`, {
+    method: "DELETE",
+  });
+
+  document.location.replace("/dashboard");
+};
+
+document
+  .querySelector("#edit-entry-form")
+  .addEventListener("submit", editFormHandler);
+document
+  .querySelector("#delete-entry-btn")
+  .addEventListener("click", deleteClickHandler);

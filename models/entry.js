@@ -1,36 +1,46 @@
-const entryId = document.querySelector('input[name="entry-id"]').value;
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connections");
 
-const editFormHandler = async function (event) {
-  event.preventDefault();
+class Entry extends Model {}
 
-  const title = document.querySelector('input[name="entry-title"]').value;
-  const body = document.querySelector('textarea[name="entry-body"]').value;
-
-  await fetch(`/api/entries/${entryId}`, {
-    method: 'PUT',
-    body: JSON.stringify({
-      title,
-      body,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
+Entry.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-  });
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        is: /^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/, // Regex to validate as latitude or longitude
+      },
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user_db",
+        key: "id",
+      },
+    },
+  },
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "entry",
+  }
+);
 
-  document.location.replace('/dashboard');
-};
-
-const deleteClickHandler = async function () {
-  await fetch(`/api/entries/${entryId}`, {
-    method: 'DELETE',
-  });
-
-  document.location.replace('/dashboard');
-};
-
-document
-  .querySelector('#edit-entry-form')
-  .addEventListener('submit', editFormHandler);
-document
-  .querySelector('#delete-entry-btn')
-  .addEventListener('click', deleteClickHandler);
+module.exports = Entry;
