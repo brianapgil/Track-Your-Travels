@@ -38,10 +38,11 @@ router.get('/signup', (req, res) => {
   res.render('signup'); // Render the signup page
 });
 
-// Route to render the new entry page
+// Route to render the new entry page (with Mapbox token)
 router.get('/newEntry', withAuth, (req, res) => {
   res.render('newEntry', {
     logged_in: req.session.logged_in,
+    mapboxToken: process.env.MAPBOX_TOKEN, // Pass the Mapbox API token to the template
   });
 });
 
@@ -50,7 +51,7 @@ router.get('/collection', withAuth, async (req, res) => {
   try {
     const entryData = await Entry.findAll({
       where: {
-        user_id: req.session.user_id, 
+        user_id: req.session.user_id,
       },
     });
 
