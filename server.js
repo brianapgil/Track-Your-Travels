@@ -18,6 +18,7 @@ const hbs = exphbs.create({
   layoutsDir: path.join(__dirname, 'views/layout'), 
 });
 
+
 // Configure and link a session object with the sequelize store
 const sess = {
     secret: 'Super secret secret',
@@ -28,7 +29,6 @@ const sess = {
       db: sequelize
     })
   };
-  
 
 // Add express-session and store as Express.js middleware
 app.use(session(sess));
