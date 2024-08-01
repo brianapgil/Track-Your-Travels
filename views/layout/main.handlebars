@@ -11,24 +11,34 @@
 
 <body>
     <header class="navbar is-dark">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">Track Your Travels</a>
-    </div>
-        <div class="navbar-menu">
-        <div class="navbar-end">
-            {{#if logged_in}}
-            <div class="navbar-item">
-                <button id="logout" class="button is-light">Logout</button>
-            </div>
-            {{else}}
-            <div class="navbar-item">
-                <a href="/login" class="button is-light">Login</a>
-            </div>
-            <div class="navbar-item">
-                <a href="/signup" class="button is-light">Register</a>
-            </div>
-            {{/if}}
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">Track Your Travels</a>
         </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                {{#if logged_in}}
+                <div class="navbar-item">
+                    <a href="/newEntry" class="button is-light">Add Entry</a>
+                </div>
+                <div class="navbar-item">
+                    <a href="/collection" class="button is-light">Your Collection</a>
+                </div>
+                {{/if}}
+            </div>
+            <div class="navbar-end">
+                {{#if logged_in}}
+                <div class="navbar-item">
+                    <button id="logout" class="button is-light">Logout</button>
+                </div>
+                {{else}}
+                <div class="navbar-item">
+                    <a href="/login" class="button is-light">Login</a>
+                </div>
+                <div class="navbar-item">
+                    <a href="/signup" class="button is-light">Register</a>
+                </div>
+                {{/if}}
+            </div>
         </div>
     </header>
     <main class="container mt-5">
@@ -36,7 +46,7 @@
     </main>
     <footer class="footer has-background-dark has-text-white-ter">
         <div class="content has-text-centered">
-        <p>&copy; 2024 Track Your Travels</p>
+            <p>&copy; 2024 Track Your Travels</p>
         </div>
     </footer>
     <script src="/js/logout.js"></script>

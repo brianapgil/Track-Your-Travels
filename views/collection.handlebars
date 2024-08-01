@@ -1,50 +1,60 @@
 <section class="section">
-    <div class="container">
-        <h2 class="title">Your Collection</h2>
-        {{#each entry}}
+  <div class="container">
+    <h2 class="title">Your Collection</h2>
+    {{#if logged_in}}
+      {{#if entries.length}}
+        <div class="card-list">
+          {{#each entries}}
             <div class="card mb-5">
-                <div class="card content">
-                    <p class="title">{{title}}</p>
-                    <p class="description"></p>
-                    <div id="map-{{@index}}" class="map-container" style="height: 400px"></div>
-                    <button class="button is-danger mt-3" id="delete-{{id}}" onclick="deleteEntry({{id}})">Delete</button>
-                </div>
+              <div class="card-content">
+                <p class="title">{{this.title}}</p>
+                <p class="description">{{this.description}}</p>
+                <div id="map-{{@index}}" class="map-container" style="height: 400px"></div>
+                <button class="button is-danger mt-3" data-id="{{this.id}}" onclick="deleteEntry({{this.id}})">Delete</button>
+              </div>
             </div>
-        {{/each}}
-    </div>
+          {{/each}}
+        </div>
+      {{else}}
+        <p class="subtitle">You have no entries yet. Start adding some!</p>
+      {{/if}}
+    {{else}}
+      <p class="subtitle">Please log in to view your collection.</p>
+      <a href="/login" class="button is-primary">Login</a>
+    {{/if}}
+  </div>
 </section>
 
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
 
 <script>
-    mapboxgl.accessToken = '{{process.env.MAPBOX_TOKEN}}';
+  mapboxgl.accessToken = '{{process.env.MAPBOX_TOKEN}}';
 
-    {{#each entry}}
-        const coordinates = [{{location}}];
-        const map{{@index}} = new mapboxgl.Map({
-            container: 'map-{{@index}}',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: coordinates,
-            zoom: 12
-        });
+  {{#each entries}}
+    const coordinates = [{{location}}];
+    const map{{@index}} = new mapboxgl.Map({
+      container: 'map-{{@index}}',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: coordinates,
+      zoom: 12
+    });
 
-        new mapboxgl.Marker()
-            .setLngLat(coordinates)
-            .addTo(map{{@index}});
-    {{/each}}
+    new mapboxgl.Marker()
+      .setLngLat(coordinates)
+      .addTo(map{{@index}});
+  {{/each}}
 
-    async function deleteEntry(id){
-        const response = await fetch('/api/entry/${id}'), {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }
-        }
-    };
+  async function deleteEntry(id) {
+    const response = await fetch(`/api/entries/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-    if (response.ok){
-        document.location.reload();
+    if (response.ok) {
+      document.location.reload(); // Reload the page to reflect changes
     } else {
-        alert('Failed to delete entry');
+      alert('Failed to delete entry.');
     }
-
+  }
 </script>
