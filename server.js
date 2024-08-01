@@ -4,10 +4,8 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./helpers/helpers');
-
 const sequelize = require('./config/connections');
 
-// Create a new sequelize store using the express-session package
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
@@ -18,7 +16,6 @@ const hbs = exphbs.create({
   layoutsDir: path.join(__dirname, 'views/layout'), 
 });
 
-// Configure and link a session object with the sequelize store
 const sess = {
     secret: 'Super secret secret',
     cookie: {},
@@ -29,7 +26,6 @@ const sess = {
     })
 };
 
-// Add express-session and store as Express.js middleware
 app.use(session(sess));
 
 app.engine('handlebars', hbs.engine);
@@ -41,7 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-// Sync sequelize models with the database
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal server error' });
+});
+
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));
 });
