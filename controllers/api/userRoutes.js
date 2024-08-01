@@ -1,23 +1,25 @@
 const router = require('express').Router();
-const { User } = require('../../models'); // Adjust the path as needed
-const bcrypt = require('bcrypt');
-const withAuth = require('../../helpers/auth'); // Adjust the path as needed
+const { User } = require('../../models');
 
 // POST route for user signup
 router.post('/', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Check if user already exists
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
 
     // Create a new user
-    const newUser = await User.create({ email, password: hashedPassword });
+    const newUser = await User.create({ email, password });
 
-    // Redirect to login page
-    res.redirect('/login');
+    // Return a success message or user data
+    res.status(201).json({ message: 'Signup successful', user: newUser });
   } catch (err) {
-    res.status(500).json(err);
+    console.error('Error during signup:', err);
+    res.status(500).json({ message: 'Failed to sign up' });
   }
 });
 
@@ -30,15 +32,16 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ where: { email } });
 
     // Check if user exists and password matches
-    if (user && await bcrypt.compare(password, user.password)) {
+    if (user && user.checkPassword(password)) {
       req.session.logged_in = true;
       req.session.user_id = user.id;
-      req.session.username = user.username;
+      req.session.username = user.email; 
       res.json({ message: 'Login successful' });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (err) {
+    console.error('Error during login:', err);
     res.status(500).json({ message: 'Failed to log in' });
   }
 });

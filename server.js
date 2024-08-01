@@ -18,7 +18,6 @@ const hbs = exphbs.create({
   layoutsDir: path.join(__dirname, 'views/layout'), 
 });
 
-
 // Configure and link a session object with the sequelize store
 const sess = {
     secret: 'Super secret secret',
@@ -28,7 +27,7 @@ const sess = {
     store: new SequelizeStore({
       db: sequelize
     })
-  };
+};
 
 // Add express-session and store as Express.js middleware
 app.use(session(sess));
@@ -42,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+// Sync sequelize models with the database
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}`));
 });
