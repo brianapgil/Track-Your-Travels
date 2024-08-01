@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Travels</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header class="navbar is-dark">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">Travel Blog</a>
+    </div>
+        <div class="navbar-menu">
+        <div class="navbar-end">
+            {{#if logged_in}}
+            <div class="navbar-item">
+                <button id="logout" class="button is-light">Logout</button>
+            </div>
+            {{else}}
+            <div class="navbar-item">
+                <a href="/login" class="button is-light">Login</a>
+            </div>
+            <div class="navbar-item">
+                <a href="/register" class="button is-light">Register</a>
+            </div>
+            {{/if}}
+        </div>
+        </div>
+    </header>
+    <main class="container mt-5">
+        {{{ body }}}
+    </main>
+    <footer class="footer has-background-dark has-text-white-ter">
+        <div class="content has-text-centered">
+        <p>&copy; 2024 Track Your Travels</p>
+        </div>
+    </footer>
+</body>
+
+</html>
