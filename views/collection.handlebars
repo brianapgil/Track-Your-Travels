@@ -9,7 +9,7 @@
               <div class="card-content">
                 <p class="title">{{this.title}}</p>
                 <p class="description">{{this.description}}</p>
-                <div id="map-{{@index}}" class="map-container" style="height: 400px"></div>
+                <div id="map-{{@index}}" class="map-container"></div> <!-- Consistency in Map Containers -->
                 <button class="button is-danger mt-3" data-id="{{this.id}}" onclick="deleteEntry({{this.id}})">Delete</button>
               </div>
             </div>
@@ -25,34 +25,42 @@
   </div>
 </section>
 
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+<!-- Mapbox CSS -->
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
 
+<!-- Mapbox JS -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+
 <script>
-  mapboxgl.accessToken = '{{process.env.MAPBOX_TOKEN}}';
+  document.addEventListener('DOMContentLoaded', () => {
+    mapboxgl.accessToken = '{{mapboxToken}}';
+    {{#each entries}}
+      (function(index) {
+        const coordinates = '{{this.location}}'.split(',').reverse().map(coord => parseFloat(coord.trim()));
+        console.log('Coordinates for entry ' + index + ':', coordinates); // Debugging line
+        
+        const map = new mapboxgl.Map({
+          container: 'map-' + index,
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: coordinates,
+          zoom: 15 // Close-up view
+        });
+         new mapboxgl.Marker()
+          .setLngLat(coordinates)
+          .addTo(map);
+      })({{@index}});
+    {{/each}}
+  });
 
-  {{#each entries}}
-    const coordinates = [{{location}}];
-    const map{{@index}} = new mapboxgl.Map({
-      container: 'map-{{@index}}',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: coordinates,
-      zoom: 12
-    });
-
-    new mapboxgl.Marker()
-      .setLngLat(coordinates)
-      .addTo(map{{@index}});
-  {{/each}}
 
   async function deleteEntry(id) {
     const response = await fetch(`/api/entries/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });
-
     if (response.ok) {
-      document.location.reload(); // Reload the page to reflect changes
+      // Reload the page to reflect changes
+      document.location.reload();
     } else {
       alert('Failed to delete entry.');
     }

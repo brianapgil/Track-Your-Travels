@@ -60,6 +60,7 @@ router.get('/collection', withAuth, async (req, res) => {
     res.render('collection', {
       entries,
       logged_in: req.session.logged_in,
+      mapboxToken: process.env.MAPBOX_TOKEN, // Pass the Mapbox API token
     });
   } catch (err) {
     console.error(err);
