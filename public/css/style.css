@@ -10,14 +10,13 @@
     color: black;
     font-weight: bold; 
     margin-bottom: 1rem;
-    background-color: inherit; /* Ensure the background color doesn't affect the border */
+    background-color: inherit; 
 }
 
 .main-header {
     background-color: rgb(5, 44, 36);
 }
 
-/* Ensure the header has a background color and no additional margin affects the border */
 .header-blue {
     background-color: lightblue;
 }
@@ -30,125 +29,137 @@
     background-color: lightcoral;
 }
 
+.header-yellow {
+    background-color: rgb(248, 248, 154);
+}
+
+.header-orange {
+    background-color: #e7a466;
+}
+
+.header-purple {
+    background-color: rgb(160, 160, 224);
+}
+
 .title {
     text-align: center;
-    margin-bottom: 2rem; /* Add spacing between the main title and the cards */
+    margin-bottom: 2rem;
 }
 
 .card-title {
-    font-size: 1.5rem; /* Adjust the font size as needed */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center the text */
+    font-size: 1.5rem; 
+    margin: 0; 
+    text-align: center; 
 }
 
 .logo-container {
-    text-align: center; /* Center the logo horizontally */
-    margin: 2rem 0; /* Add some space above and below the image */
+    text-align: center; 
+    margin: 2rem 0; 
 }
 
 /* Style for the logo image */
 .logo-image {
-    width: 200px; /* Set the width of the image */
-    height: 200px; /* Set the height of the image */
-    object-fit: cover; /* Ensure the image maintains its aspect ratio */
+    width: 200px; 
+    height: 200px; 
+    object-fit: cover; 
 }
 
 /* Styles specific to home page cards */
 .home-card {
-    border: 1px solid black; /* Adds a small black border */
-    border-radius: 5px; /* Optional: Adds rounded corners to the border */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Optional: Adds a slight shadow for better visual separation */
-    transition: box-shadow 0.3s ease; /* Optional: Smooth transition for hover effect */
-    margin: 0 auto; /* Center the card horizontally */
+    border: 1px solid black; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); 
+    transition: box-shadow 0.3s ease; 
+    margin: 0 auto; 
 }
 
 .home-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Optional: Enhances shadow on hover for a subtle effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); 
 }
 
 .card-content p {
-    text-align: center; /* Center the text within the card content */
+    text-align: center; 
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
 
 .navbar-item {
-    color: white; /* Set text color to white */
+    color: white; 
 }
 
 .navbar-item img {
-    margin-right: 10px; /* Space between logo and text */
+    margin-right: 10px; 
 }
 
 .navbar-text {
-    color: white; /* Ensure the text color is white */
+    color: white; 
 }
 
 /* Sign-up card styling */
 .signup-card {
-    width: 70%; /* Set the width to 70% of the page */
-    max-width: 600px; /* Optional: Set a maximum width for larger screens */
-    margin: 2rem auto; /* Center the card horizontally with vertical spacing */
-    padding: 1.5rem; /* Add padding inside the card */
+    width: 70%; 
+    max-width: 600px; 
+    margin: 2rem auto; 
+    padding: 1.5rem; 
 }
 
 /* Sign-up card header styling */
 .signup-card-header {
-    background-color: #007bff; /* Light background color for the header */
-    padding: 1rem; /* Add padding inside the header */
-    border-bottom: 1px solid #ddd; /* Add a bottom border to separate the header from the body */
+    background-color: #007bff; 
+    padding: 1rem; 
+    border-bottom: 1px solid #ddd; 
 }
 
 .signup-title {
-    font-size: 1.5rem; /* Adjust the title size */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center the title text */
+    font-size: 1.5rem; 
+    margin: 0; 
+    text-align: center; 
     color: white;
 }
 
 /* Form styling */
 .signup-form {
-    padding: 1rem; /* Add padding inside the form */
+    padding: 1rem; 
 }
 
 /* Form group styling */
 .form-group {
-    margin-bottom: 1rem; /* Add spacing between form elements */
+    margin-bottom: 1rem; 
 }
 
 .form-label {
-    display: block; /* Ensure the label takes up a full line */
-    margin-bottom: 0.5rem; /* Add spacing below the label */
+    display: block; 
+    margin-bottom: 0.5rem; 
 }
 
 .form-input {
-    width: 100%; /* Make input fields span the full width of the card */
-    padding: 0.5rem; /* Add padding inside input fields */
-    border: 1px solid #ddd; /* Add a light border */
-    border-radius: 4px; /* Optional: Rounded corners */
+    width: 100%; 
+    padding: 0.5rem; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
 }
 
 /* Button styling */
 .signup-btn {
-    display: block; /* Ensure the button takes up its own line */
-    width: 100%; /* Make the button span the full width of the card */
-    padding: 0.75rem; /* Add padding inside the button */
-    background-color: #007bff; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove default border */
-    border-radius: 4px; /* Optional: Rounded corners */
-    font-size: 1rem; /* Adjust button text size */
-    cursor: pointer; /* Change cursor on hover */
-    margin-top: 1rem; /* Add spacing above the button */
+    display: block; 
+    width: 100%; 
+    padding: 0.75rem; 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    margin-top: 1rem; 
 }
 
 .signup-btn:hover {
-    background-color: #0056b3; /* Darker background on hover */
+    background-color: #0056b3; 
 }
 
 /* Link styling */
 .signup-link {
-    display: block; /* Ensure the link takes up its own line */
-    margin-top: 1rem; /* Add spacing above the link */
-    text-align: center; /* Center the link text */
+    display: block; 
+    margin-top: 1rem; 
+    text-align: center; 
 }
