@@ -19,7 +19,7 @@ Entry.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        // Ensure the format is 'latitude, longitude'
+        // Ensures that the format is 'latitude, longitude'
         is: {
           args: /^-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?$/,
           msg: 'Location must be in the format "latitude, longitude"'

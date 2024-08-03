@@ -1,38 +1,38 @@
 <section class="section">
   <div class="container">
     <h2 class="title">Edit Travel Entry</h2>
-    {{#if logged_in}}
-      <form id="edit-entry-form">
-        <input type="hidden" name="id" value="{{entry.id}}" />
+      {{#if logged_in}}
+        <form id="edit-entry-form">
+          <input type="hidden" name="id" value="{{entry.id}}" />
 
-        <div class="field">
-          <label class="label" for="title">Title:</label>
-          <div class="control">
-            <input class="input" type="text" id="title" name="title" value="{{entry.title}}" required>
+          <div class="field">
+            <label class="label" for="title">Title:</label>
+            <div class="control">
+              <input class="input" type="text" id="title" name="title" value="{{entry.title}}" required>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="description">Description:</label>
-          <div class="control">
-            <textarea class="textarea" id="description" name="description" required>{{entry.description}}</textarea>
+          <div class="field">
+            <label class="label" for="description">Description:</label>
+            <div class="control">
+              <textarea class="textarea" id="description" name="description" required>{{entry.description}}</textarea>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="location">Location (Latitude, Longitude):</label>
-          <div class="control">
-            <input class="input" type="text" id="location" name="location" value="{{entry.location}}" placeholder="e.g., 40.712776, -74.005974" required>
+          <div class="field">
+            <label class="label" for="location">Location (Latitude, Longitude):</label>
+            <div class="control">
+              <input class="input" type="text" id="location" name="location" value="{{entry.location}}" placeholder="e.g., 40.712776, -74.005974" required>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label" for="map">Map:</label>
-          <div id="map" class="map-container" style="height: 400px; width: 100%;"></div>
-        </div>
-        <div class="control">
-          <button class="button is-primary" type="submit">Update Entry</button>
-          <button type="button" id="delete-entry-btn" class="button is-danger">Delete Entry</button>
-        </div>
-      </form>
-    {{else}}
+          <div class="field">
+            <label class="label" for="map">Map:</label>
+            <div id="map" class="map-container" style="height: 400px; width: 100%;"></div>
+          </div>
+          <div class="control">
+            <button class="button is-primary" type="submit">Update Entry</button>
+            <button type="button" id="delete-entry-btn" class="button is-danger">Delete Entry</button>
+          </div>
+        </form>
+      {{else}}
       <p class="subtitle">Please log in to edit this entry.</p>
       <a href="/login" class="button is-primary">Login</a>
     {{/if}}
@@ -47,7 +47,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     mapboxgl.accessToken = '{{mapboxToken}}';
 
-    // Extract latitude and longitude from the location input
     const location = '{{entry.location}}'.split(',').map(coord => coord.trim());
     const latitude = parseFloat(location[0]);
     const longitude = parseFloat(location[1]);
@@ -56,7 +55,7 @@
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [longitude, latitude], // Use longitude and latitude here
+      center: [longitude, latitude], 
       zoom: 12
     });
 

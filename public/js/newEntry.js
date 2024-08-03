@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Initialize the map
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiZXJrYW5va3RlbiIsImEiOiJjbHowamcyNXMzMmdvMnJwdWJpdjNpaTh3In0.LmSWZMltIJ65JPTwlp93Yw";
     const map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/mapbox/streets-v11",
@@ -38,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
   
           if (response.ok) {
-            window.location.href = "/some-success-page"; // Adjust this to your needs
+            window.location.href = "/some-success-page"; 
           } else {
             alert("Failed to add entry.");
           }
