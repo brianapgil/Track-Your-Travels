@@ -1,25 +1,70 @@
-<div class="post card">
-  <div class="card-header">
-    <h2>Edit Entry</h2>
+<section class="section">
+  <div class="container">
+    <h2 class="title">Edit Travel Entry</h2>
+    {{#if logged_in}}
+      <form id="edit-entry-form">
+        <input type="hidden" name="id" value="{{entry.id}}" />
+
+        <div class="field">
+          <label class="label" for="title">Title:</label>
+          <div class="control">
+            <input class="input" type="text" id="title" name="title" value="{{entry.title}}" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="description">Description:</label>
+          <div class="control">
+            <textarea class="textarea" id="description" name="description" required>{{entry.description}}</textarea>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="location">Location (Latitude, Longitude):</label>
+          <div class="control">
+            <input class="input" type="text" id="location" name="location" value="{{entry.location}}" placeholder="e.g., 40.712776, -74.005974" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="map">Map:</label>
+          <div id="map" class="map-container" style="height: 400px; width: 100%;"></div>
+        </div>
+        <div class="control">
+          <button class="button is-primary" type="submit">Update Entry</button>
+          <button type="button" id="delete-entry-btn" class="button is-danger">Delete Entry</button>
+        </div>
+      </form>
+    {{else}}
+      <p class="subtitle">Please log in to edit this entry.</p>
+      <a href="/login" class="button is-primary">Login</a>
+    {{/if}}
   </div>
-  {{#if logged_in}}
-    <form id="edit-entry-form" class="card-body">
-      <input type="hidden" name="entry-id" value="{{entry.id}}" />
+</section>
 
-      <label class="form-label" for="entry-title">Title</label>
-      <input type="text" name="entry-title" value="{{entry.title}}" class="form-input" />
+<!-- Mapbox JS -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
 
-      <label class="form-label" for="entry-body">Content</label>
-      <textarea name="entry-body" class="form-input">{{entry.body}}</textarea>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    mapboxgl.accessToken = '{{mapboxToken}}';
 
-      <button type="submit" class="btn">Update</button>
+    // Extract latitude and longitude from the location input
+    const location = '{{entry.location}}'.split(',').map(coord => coord.trim());
+    const latitude = parseFloat(location[0]);
+    const longitude = parseFloat(location[1]);
 
-      <button type="button" id="delete-entry-btn" class="btn">Delete</button>
-    </form>
-  {{else}}
-    <p class="subtitle">Please log in to edit this entry.</p>
-    <a href="/login" class="button is-primary">Login</a>
-  {{/if}}
-</div>
+    // Initialize the map
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [longitude, latitude], // Use longitude and latitude here
+      zoom: 12
+    });
 
-<script src="../public/js/editEntry.js"></script>
+    map.on('click', (e) => {
+      const coordinates = e.lngLat;
+      document.getElementById('location').value = `${coordinates.lat}, ${coordinates.lng}`;
+    });
+  });
+</script>
+
+<script src="/js/editEntry.js"></script>
