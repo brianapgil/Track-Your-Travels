@@ -68,4 +68,30 @@ router.get('/collection', withAuth, async (req, res) => {
   }
 });
 
+router.get('/editEntry/:id', withAuth, async (req, res) => {
+  try {
+    const entryData = await Entry.findOne({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
+    if (!entryData) {
+      return res.status(404).render('404'); // Render a 404 page or redirect
+    }
+
+    const entry = entryData.get({ plain: true });
+
+    res.render('editEntry', {
+      entry,
+      logged_in: req.session.logged_in,
+      mapboxToken: process.env.MAPBOX_TOKEN, // Pass Mapbox token if needed
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
