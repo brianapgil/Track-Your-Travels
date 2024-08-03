@@ -94,4 +94,10 @@ router.get('/editEntry/:id', withAuth, async (req, res) => {
   }
 });
 
+router.get('/travelTips', withAuth, (req, res) => {
+  res.render('travelTips', {
+    logged_in: req.session.logged_in
+  });
+});
+
 module.exports = router;

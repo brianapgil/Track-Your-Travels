@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User_db } = require('../../models'); // Ensure path matches
+const { User_db } = require('../../models'); 
 
 router.post('/', async (req, res) => {
     try {
