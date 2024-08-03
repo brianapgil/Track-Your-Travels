@@ -42,7 +42,7 @@ router.get('/signup', (req, res) => {
 router.get('/newEntry', withAuth, (req, res) => {
   res.render('newEntry', {
     logged_in: req.session.logged_in,
-    mapboxToken: process.env.MAPBOX_TOKEN, // Pass the Mapbox API token to the template
+    mapboxToken: process.env.MAPBOX_TOKEN, 
   });
 });
 
@@ -60,7 +60,7 @@ router.get('/collection', withAuth, async (req, res) => {
     res.render('collection', {
       entries,
       logged_in: req.session.logged_in,
-      mapboxToken: process.env.MAPBOX_TOKEN, // Pass the Mapbox API token
+      mapboxToken: process.env.MAPBOX_TOKEN, 
     });
   } catch (err) {
     console.error(err);
@@ -86,7 +86,7 @@ router.get('/editEntry/:id', withAuth, async (req, res) => {
     res.render('editEntry', {
       entry,
       logged_in: req.session.logged_in,
-      mapboxToken: process.env.MAPBOX_TOKEN, // Pass Mapbox token if needed
+      mapboxToken: process.env.MAPBOX_TOKEN, 
     });
   } catch (err) {
     console.error(err);
