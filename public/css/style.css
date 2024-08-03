@@ -83,3 +83,72 @@
 .navbar-text {
     color: white; /* Ensure the text color is white */
 }
+
+/* Sign-up card styling */
+.signup-card {
+    width: 70%; /* Set the width to 70% of the page */
+    max-width: 600px; /* Optional: Set a maximum width for larger screens */
+    margin: 2rem auto; /* Center the card horizontally with vertical spacing */
+    padding: 1.5rem; /* Add padding inside the card */
+}
+
+/* Sign-up card header styling */
+.signup-card-header {
+    background-color: #007bff; /* Light background color for the header */
+    padding: 1rem; /* Add padding inside the header */
+    border-bottom: 1px solid #ddd; /* Add a bottom border to separate the header from the body */
+}
+
+.signup-title {
+    font-size: 1.5rem; /* Adjust the title size */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center the title text */
+    color: white;
+}
+
+/* Form styling */
+.signup-form {
+    padding: 1rem; /* Add padding inside the form */
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 1rem; /* Add spacing between form elements */
+}
+
+.form-label {
+    display: block; /* Ensure the label takes up a full line */
+    margin-bottom: 0.5rem; /* Add spacing below the label */
+}
+
+.form-input {
+    width: 100%; /* Make input fields span the full width of the card */
+    padding: 0.5rem; /* Add padding inside input fields */
+    border: 1px solid #ddd; /* Add a light border */
+    border-radius: 4px; /* Optional: Rounded corners */
+}
+
+/* Button styling */
+.signup-btn {
+    display: block; /* Ensure the button takes up its own line */
+    width: 100%; /* Make the button span the full width of the card */
+    padding: 0.75rem; /* Add padding inside the button */
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Optional: Rounded corners */
+    font-size: 1rem; /* Adjust button text size */
+    cursor: pointer; /* Change cursor on hover */
+    margin-top: 1rem; /* Add spacing above the button */
+}
+
+.signup-btn:hover {
+    background-color: #0056b3; /* Darker background on hover */
+}
+
+/* Link styling */
+.signup-link {
+    display: block; /* Ensure the link takes up its own line */
+    margin-top: 1rem; /* Add spacing above the link */
+    text-align: center; /* Center the link text */
+}
