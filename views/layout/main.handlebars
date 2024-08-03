@@ -5,14 +5,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Track Your Travels</title>
+  <link rel="icon" href="/images/TrackYourTravels.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="/css/style.css">
+    <style>
+    /* Make sure the body takes up the full viewport height */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: rgb(188, 210, 218);
+    }
+    /* Apply to the main content to push the footer to the bottom */
+    .container {
+      min-height: calc(100vh - 4rem); /* Adjust the value to fit the footer height */
+      display: flex;
+      flex-direction: column;
+    }
+    /* Define the footer height */
+    .footer {
+      background-color: rgb(5, 44, 36); 
+      color: #ffffff; 
+      padding: 1rem; 
+      text-align: center; 
+      position: relative;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
 </head>
 
 <body>
-    <header class="navbar is-dark">
+    <header class="navbar main-header">
         <div class="navbar-brand">
-            <a class="navbar-item" href="/">Track Your Travels</a>
+            <!-- Logo Image -->
+            <a class="navbar-item" href="/">
+                <img src="/images/TrackYourTravels.png" alt="Logo" style="height: 40px;">
+                <span class="navbar-text">Track Your Travels - Home</span>
+            </a>
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
@@ -44,7 +73,7 @@
     <main class="container mt-5">
         {{{ body }}}
     </main>
-    <footer class="footer has-background-dark has-text-white-ter">
+    <footer class="footer has-text-white-ter">
         <div class="content has-text-centered">
             <p>&copy; 2024 Track Your Travels</p>
         </div>
