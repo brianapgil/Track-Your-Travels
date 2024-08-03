@@ -1,19 +1,19 @@
-<div class="card">
-  <div class="card-header">
-    <h2>Sign Up</h2>
+<div class="card signup-card">
+  <div class="card-header signup-card-header">
+    <h2 class="signup-title">Sign Up</h2>
   </div>
   <div id="signup" role="tabpanel">
-    <form id="signup-form" class="card-body">
-      <div>
+    <form id="signup-form" class="signup-form">
+      <div class="form-group">
         <label for="email-signup" class="form-label">Email</label>
-        <input type="email" id="email-signup" name="email" />
+        <input type="email" id="email-signup" name="email" class="form-input" />
       </div>
-      <div>
+      <div class="form-group">
         <label for="password-signup" class="form-label">Password</label>
-        <input type="password" id="password-signup" name="password" />
+        <input type="password" id="password-signup" name="password" class="form-input" />
       </div>
-      <button type="submit" id="signup-btn" class="btn">Signup!</button>
-      <a href="/login">Login instead</a>
+      <button type="submit" id="signup-btn" class="signup-btn">Sign Up!</button>
+      <a href="/login" class="signup-link">Login instead</a>
     </form>
   </div>
 </div>
