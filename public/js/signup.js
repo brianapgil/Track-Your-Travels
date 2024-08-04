@@ -1,11 +1,14 @@
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
+  // Receive and trim email and password values
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
 
+  // Check if email and password are both provided
   if (email && password) {
     try {
+      // Send a POST request to sign up
       const response = await fetch('/api/signup', { 
         method: 'POST',
         body: JSON.stringify({ email, password }),
@@ -28,4 +31,5 @@ const signupFormHandler = async (event) => {
   }
 };
 
+// Event listener
 document.querySelector('#signup-form').addEventListener('submit', signupFormHandler);

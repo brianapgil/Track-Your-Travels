@@ -2,6 +2,7 @@
   <div class="container">
     <h2 class="title">Edit Travel Entry</h2>
       {{#if logged_in}}
+      {{!-- Form to edit travel entry --}}
         <form id="edit-entry-form">
           <input type="hidden" name="id" value="{{entry.id}}" />
 
@@ -59,6 +60,7 @@
       zoom: 12
     });
 
+    // Update the location field on click
     map.on('click', (e) => {
       const coordinates = e.lngLat;
       document.getElementById('location').value = `${coordinates.lat}, ${coordinates.lng}`;

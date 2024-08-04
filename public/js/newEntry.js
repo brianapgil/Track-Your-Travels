@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
       zoom: 12,
     });
   
-   
+   // Event listener for clicking on the map to automatically set the latitude and longitude for the location
     map.on("click", (e) => {
       const coordinates = e.lngLat;
       document.getElementById(
@@ -27,8 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ).value;
       const location = document.querySelector('input[name="location"]').value;
   
+      // Check if all fields are filled
       if (title && description && location) {
         try {
+          // Send a POST request to the API with the form data
           const response = await fetch("/api/entries", {
             method: "POST",
             body: JSON.stringify({ title, description, location }),
