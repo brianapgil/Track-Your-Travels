@@ -1,19 +1,21 @@
 const router = require('express').Router();
 const { Entry } = require('../../models');
 
+// POST route for new entry
 router.post('/', async (req, res) => {
   try {
     const newEntry = await Entry.create({
       ...req.body,
       user_id: req.session.user_id,
     });
-
+    // Respond with newly created entry
     res.status(200).json(newEntry);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json(err); // Error handling
   }
 });
 
+// GET route for edit entry by ID
 router.get('/edit/:id', async (req, res) => {
   try {
     const entry = await Entry.findByPk(req.params.id);
@@ -41,12 +43,14 @@ router.get('/edit/:id', async (req, res) => {
   }
 });
 
+// PUT route to update an entry by its ID
 router.put('/:id', async (req, res) => {
   try {
     console.log(req.body); // Log request body for debugging
     const { title, description, location } = req.body;
     const [latitude, longitude] = location.split(',').map(coord => coord.trim());
 
+    // Update the entry with new data
     const [affectedRows] = await Entry.update({
       title,
       description,
@@ -69,8 +73,10 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// DELETE route for an entry by id
 router.delete('/:id', async (req, res) => {
   try {
+    // Delete the entry
     const entryData = await Entry.destroy({
       where: {
         id: req.params.id,

@@ -3,6 +3,7 @@ const sequelize = require('../config/connections');
 
 class Entry extends Model {}
 
+// Initialize the Entry model
 Entry.init(
   {
     id: {
@@ -33,7 +34,7 @@ Entry.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user_db',
+        model: 'user_db', // References the user_db model
         key: 'id',
       },
     },
